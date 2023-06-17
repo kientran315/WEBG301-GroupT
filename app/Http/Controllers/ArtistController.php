@@ -36,6 +36,8 @@ class ArtistController extends Controller
         $artist->nationality = $request->nationality;
         $artist->email = $request->email;
         $artist->biography = $request->biography;
+        $photo = $request->file('photo')->store('upload');
+        $artist->photo = substr($photo, strlen('public/'));
 
         $artist->save();
 

@@ -9,5 +9,5 @@ class Artist extends Model
 {
     use HasFactory;
     protected $table = 'artists';
-    protected $fillable = ['name', 'age','nationality','biography'];
+    protected $fillable = ['name', 'age','nationality','biography','photo',];
 }
