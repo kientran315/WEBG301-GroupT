@@ -1,5 +1,9 @@
 <?php
-
+use App\Http\Controllers\NationalController;
+use App\Http\Controllers\SongController;
+use App\Http\Controllers\ArtistController;
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\AlbumController;
 use Illuminate\Support\Facades\Route;
 
 /*
