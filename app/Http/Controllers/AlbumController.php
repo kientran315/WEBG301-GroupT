@@ -31,7 +31,8 @@ class AlbumController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
-    {
+    {   
+        $album = new Album();
         $album->name = $request->name;
         $album->description = $request->description;
         $album->year = $request->year;
