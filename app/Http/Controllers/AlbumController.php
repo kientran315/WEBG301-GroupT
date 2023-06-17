@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 
+use Illuminate\Http\Request;
+use App\Models\Album;
 class AlbumController extends Controller
 {
     /**
@@ -11,7 +12,11 @@ class AlbumController extends Controller
      */
     public function index()
     {
-        //
+        $albums = Album::all();
+
+        return view('album.index', [
+            'albums' => $albums,
+        ]);
     }
 
     /**
@@ -19,7 +24,7 @@ class AlbumController extends Controller
      */
     public function create()
     {
-        //
+        return view('album.create');
     }
 
     /**
@@ -27,7 +32,14 @@ class AlbumController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $album->name = $request->name;
+        $album->description = $request->description;
+        $album->year = $request->year;
+
+
+        $album->save();
+
+        return redirect('/albums');
     }
 
     /**
@@ -35,7 +47,10 @@ class AlbumController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $album = Album::find($id);
+        return view('album.show', [
+            'album' => $album,
+        ]);
     }
 
     /**
@@ -43,7 +58,10 @@ class AlbumController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $album = Album::find($id);
+        return view('album.edit', [
+            'album' => $album,
+        ]);
     }
 
     /**
@@ -51,7 +69,16 @@ class AlbumController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $album =  Album::find($id);
+
+        $album->name = $request->name;
+        $album->description = $request->description;
+        $album->year = $request->year;
+
+
+        $album->save();
+
+        return redirect('/albums');
     }
 
     /**
@@ -59,6 +86,10 @@ class AlbumController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $album = Album::find($id);
+
+        $album->delete();
+
+        return redirect('/albums');
     }
 }

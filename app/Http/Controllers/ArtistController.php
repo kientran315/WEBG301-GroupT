@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Artist;
 
 class ArtistController extends Controller
 {
@@ -11,7 +12,9 @@ class ArtistController extends Controller
      */
     public function index()
     {
-        //
+        $artists = Artist::all();
+
+        return view('artist.index', ['artists' => $artists]);
     }
 
     /**
@@ -19,7 +22,7 @@ class ArtistController extends Controller
      */
     public function create()
     {
-        //
+        return view('artist.create');
     }
 
     /**
@@ -27,7 +30,16 @@ class ArtistController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $artist = new Artist();
+        $artist->name = $request->name;
+        $artist->age = $request->age;
+        $artist->nationality = $request->nationality;
+        $artist->email = $request->email;
+        $artist->biography = $request->biography;
+
+        $artist->save();
+
+        return redirect('/artists');
     }
 
     /**
@@ -35,7 +47,9 @@ class ArtistController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $artist = Artist::find($id);
+
+        return view('artist.show', ['artist' => $artist]);
     }
 
     /**
@@ -43,7 +57,9 @@ class ArtistController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $artist = Artist::find($id);
+
+        return view('artist.edit', ['artist' => $artist]);
     }
 
     /**
@@ -51,7 +67,16 @@ class ArtistController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $artist =  Artist::find($id);
+        $artist->name = $request->name;
+        $artist->age = $request->age;
+        $artist->nationality = $request->nationality;
+        $artist->email = $request->email;
+        $artist->biography = $request->biography;
+
+        $artist->save();
+
+        return redirect('/artists');
     }
 
     /**
@@ -59,6 +84,10 @@ class ArtistController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $artist = Artist::find($id);
+
+        $artist->delete();
+
+        return redirect('/artists');
     }
 }
