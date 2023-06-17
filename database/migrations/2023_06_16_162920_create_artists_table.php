@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('age');
             $table->string('nationality');
             $table->string('biography');
+            $table->string('photo');
             $table->timestamps();
         });
     }
