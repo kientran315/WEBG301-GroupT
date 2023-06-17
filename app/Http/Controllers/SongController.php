@@ -2,6 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Album;
+use App\Models\Artist;
+use App\Models\Category;
+use App\Models\National;
+use App\Models\Song;
 use Illuminate\Http\Request;
 
 class SongController extends Controller
@@ -11,7 +16,8 @@ class SongController extends Controller
      */
     public function index()
     {
-        //
+        $songs = Song::All();
+        return view('song.index', ['songs' => $songs]);
     }
 
     /**
@@ -19,7 +25,16 @@ class SongController extends Controller
      */
     public function create()
     {
-        //
+        $artists = Artist::all();
+        $categories = Category::all();
+        $albums = Album::all();
+        $nationals = National::all();
+        return view('song.create',[
+            'artists' => $artists,
+            'categories' => $categories,
+            'albums' => $albums,
+            'nationals' => $nationals
+        ]);
     }
 
     /**
@@ -27,7 +42,17 @@ class SongController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $song = new Song();
+        $song->name = $request->name;
+        $song->artist_id = $request->artist;
+        $song->album_id = $request->album;
+        $song->national_id = $request->national;
+        $song->category_id = $request->category;
+        $video = $request->file('video')->store('upload');
+        $song->video = substr($video, strlen('public/'));
+        $song->save();
+
+        return redirect('/songs')->with('status', 'Success');
     }
 
     /**
@@ -35,7 +60,9 @@ class SongController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $song = Song::find($id);
+
+        return view('song.show', ['song' => $song]);
     }
 
     /**
@@ -43,7 +70,9 @@ class SongController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $song = Song::find($id);
+
+        return view('song.edit', ['song' => $song]);
     }
 
     /**
@@ -51,7 +80,18 @@ class SongController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $song = Song::find($id);
+        $artists = Artist::all();
+        $categories = Category::all();
+        $albums = Album::all();
+        $nationals = National::all();
+        return view('song.edit', [
+            'song' => $song,
+            'artists' => $artists,
+            'categories' => $categories,
+            'albums' => $albums,
+            'nationals' => $nationals
+        ]);
     }
 
     /**
@@ -59,6 +99,10 @@ class SongController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $song = Song::find($id);
+
+        $song->delete();
+
+        return redirect('/songs');
     }
 }
