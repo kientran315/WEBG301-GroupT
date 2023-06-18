@@ -15,12 +15,14 @@
                     </div>
                     <div class="mb-3">
                         <label for="artist" class="form-label" style="color: red">Artist</label>
-                        <select id="artist" name="artist" class="form-select" aria-label="Select Author">
-                            <option selected>Please choose one</option>
-                            @foreach($artists as $artist)
-                            <option {{ ($artist->id == $song->artist->id)?"selected":""}} value="{{$artist->id}}">{{$artist->name}}</option>
-                            @endforeach
-                        </select>
+                        <div class="mb-3">
+                            <label for="artist" class="form-label" style="color: red">Artist</label>
+                            <select id="artists" name="artists[]" class="form-select" aria-label="Select Artists" multiple>            
+                                @foreach($artists as $artist)
+                                <option value="{{$artist->id}}">{{$artist->name}}</option>
+                                @endforeach
+                            </select>
+                        </div>
                     </div>
                     <div class="mb-3">
                         <label for="album" class="form-label" style="color: red">Album</label>

@@ -13,8 +13,9 @@ class Song extends Model
         'name', 'artist_id', 'album_id', 'category_id', 'national_id','video', 
     ];
 
-    public function artist(){
-        return $this->belongsTo(Artist::class);
+    public function artists()
+    {
+        return $this->belongsToMany(Artist::class);
     }
 
     public function album(){

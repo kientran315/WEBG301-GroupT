@@ -14,7 +14,11 @@
                     </div>
                     <div class="col" style="margin-top:5rem;">
                         <h4 class="card-title">You are watching MV: {{$song->name}}</h4>
-                        <p class="card-text">Artist: {{$song->artist->name}}</p>
+                        <p class="card-text">Artist: 
+                            @foreach($song->artists as $artist)
+                                {{$artist->name}};
+                            @endforeach
+                        </p>
                         <p class="card-text">Category: {{$song->category->name}}</p>
                         <p class="card-text">Album: {{$song->album->name}}</p>
                         <p class="card-text">National:{{$song->national->name}}</p>
@@ -36,3 +40,7 @@
           
        
     </section>
+
+
+    
+   

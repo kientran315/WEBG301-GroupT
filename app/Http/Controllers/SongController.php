@@ -44,13 +44,13 @@ class SongController extends Controller
     {
         $song = new Song();
         $song->name = $request->name;
-        $song->artist_id = $request->artist;
         $song->album_id = $request->album;
         $song->national_id = $request->national;
         $song->category_id = $request->category;
         $video = $request->file('video')->store('upload');
         $song->video = substr($video, strlen('public/'));
         $song->save();
+        $song->artists()->attach($request->artists);
 
         return redirect('/songs')->with('status', 'Success');
     }
@@ -71,16 +71,6 @@ class SongController extends Controller
     public function edit(string $id)
     {
         $song = Song::find($id);
-
-        return view('song.edit', ['song' => $song]);
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        $song = Song::find($id);
         $artists = Artist::all();
         $categories = Category::all();
         $albums = Album::all();
@@ -91,7 +81,26 @@ class SongController extends Controller
             'categories' => $categories,
             'albums' => $albums,
             'nationals' => $nationals
-        ]);
+    
+    ]);
+    }
+
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(Request $request, string $id)
+    {
+        $song =  Song::find($id);
+        $song->name = $request->name;
+        $song->artists()->sync($request->artists);
+        $song->album_id = $request->album;
+        $song->national_id = $request->national;
+        $song->category_id = $request->category;
+        $video = $request->file('video')->store('upload');
+        $song->video = substr($video, strlen('public/'));
+        $song->save();
+
+        return redirect('/songs')->with('status', 'Success');
     }
 
     /**

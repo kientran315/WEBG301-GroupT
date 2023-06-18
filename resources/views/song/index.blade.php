@@ -7,7 +7,6 @@
          <li class="list-group-item d-flex justify-content-between align-items-start">
            <div class="ms-2 me-auto">
              <div class="fw-bold"><a style="color: #18191a;text-decoration:none;" href="{{url("/songs/".$song->id)}}">{{$song->name}}</a></div>
-             {{$song->artist->name}}
            </div>
            <span class="badge bg-secondary rounded-pill">
              <a href="{{url("/songs/".$song->id)}}" class="btn btn-secondary">View</a>
