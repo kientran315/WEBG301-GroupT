@@ -11,4 +11,9 @@ class Category extends Model
 
     protected $table = 'categories';
     protected $fillable = ['name'];
+
+    public function songs()
+    {
+        return $this->hasMany(Song::class);
+    } 
 }

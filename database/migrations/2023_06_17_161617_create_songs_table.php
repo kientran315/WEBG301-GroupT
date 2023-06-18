@@ -14,9 +14,9 @@ return new class extends Migration
         Schema::create('songs', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('album_id');
-            $table->string('category_id');
-            $table->string('national_id');
+            $table->foreignId('album_id')->constrained();
+            $table->foreignId('category_id')->constrained();
+            $table->foreignId('national_id')->constrained();
             $table->string('video');
             $table->timestamps();
         });
