@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class AuthenticationController extends Controller
 {
@@ -26,7 +29,7 @@ class AuthenticationController extends Controller
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
 
-            return redirect('/books');
+            return redirect('http://127.0.0.1:8000');
         }
 
         return back()->withErrors([
@@ -46,7 +49,7 @@ class AuthenticationController extends Controller
 
         $credentials = $request->only('name', 'email', 'password');
         auth()->attempt($credentials);
-        return redirect('/books');
+        return redirect('http://127.0.0.1:8000');
     }
 
     public function logout(Request $request): RedirectResponse
