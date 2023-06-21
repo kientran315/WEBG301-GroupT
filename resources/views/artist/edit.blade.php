@@ -10,6 +10,10 @@
         <input type="text" class="form-control" id="name" value="{{$artist->name}}" name="name" placeholder="Artist Name">
     </div>
     <div class="mb-3">
+        <label for="photo" class="form-label" style="color: red">Artist photo</label>
+        <input type="file" class="form-control" id="photo" value="{{$artist->photo}}" name="photo" placeholder="photo">
+    </div>
+    <div class="mb-3">
         <label for="email" class="form-label">Author Email</label>
         <input type="text" class="form-control" id="email"  value="{{$artist->email}}" name="email" placeholder="Author Email">
     </div>
