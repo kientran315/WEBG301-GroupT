@@ -8,17 +8,17 @@
     </div>
     <div class="data">
       <h2>{{$artist->name}}</h2>
-      <span>{{$artist->age}}</span>
+      <span>Age: {{$artist->age}}</span>
     </div>
     <div class="row">
       <div class="info">
-        <h3>{{$artist->email}}</h3>
+        <h3>Email: {{$artist->email}}</h3>
       </div>
       <div class="info">
-        <h3>{{$artist->nationality}}</h3>
+        <h3>Nationality: {{$artist->nationality}}</h3>
       </div>
       <div class="info">
-        <h3>{{$artist->biography}}</h3>
+        <h3>Bio: {{$artist->biography}}</h3>
       </div>
     </div>
     <div class="buttons">

@@ -6,7 +6,7 @@
      <ol style="margin-left: 3rem" class="list-group list-group-numbered">
          <li class="list-group-item d-flex justify-content-between align-items-start">
            <div class="ms-2 me-auto">
-             <div class="fw-bold"><a style="color: #18191a;text-decoration:none;" href="{{url("/artalbumsists/".$album->id)}}">{{$album->name}}</a></div>
+             <div class="fw-bold"><a style="color: #18191a;text-decoration:none;" href="{{url("/albums/".$album->id)}}">{{$album->name}}</a></div>
              {{$album->name}}
            </div>
            <span class="badge bg-secondary rounded-pill">

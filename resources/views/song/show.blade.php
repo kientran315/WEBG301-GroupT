@@ -16,7 +16,7 @@
                         <h4 class="card-title">You are watching MV: {{$song->name}}</h4>
                         <p class="card-text">Artist: 
                             @foreach($song->artists as $artist)
-                                {{$artist->name}};
+                                {{$artist->name}}
                             @endforeach
                         </p>
                         <p class="card-text">Category: {{$song->category->name}}</p>
