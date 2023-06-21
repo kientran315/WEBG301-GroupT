@@ -27,10 +27,14 @@
     <div class="menu-bar">
         <div class="menu">
   
+          <form type="get" action="{{ url('/search')}}">
             <li class="search-box">
-                <i class='bx bx-search icon'></i>
-                <input type="text" placeholder="Search...">
-            </li>
+              <i class='bx bx-search icon'></i>
+              <input type="text" name="query" placeholder="Search...">
+              <input type="submit" style="display: none">
+          </li>
+          </form>
+                   
   
             <ul class="menu-links">
               <li class="nav-link">

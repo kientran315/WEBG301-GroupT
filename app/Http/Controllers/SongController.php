@@ -16,8 +16,11 @@ class SongController extends Controller
      */
     public function index()
     {
+
         $songs = Song::All();
+       
         return view('song.index', ['songs' => $songs]);
+        
     }
 
     /**
@@ -113,5 +116,11 @@ class SongController extends Controller
         $song->delete();
 
         return redirect('/songs');
+    }
+
+    public function search(){
+        $search_text = $_GET['query'];
+        $songs = Song::where('name', 'LIKE', '%'.$search_text.'%')->get(); 
+        return view('song.search', ['songs' => $songs]);
     }
 }
