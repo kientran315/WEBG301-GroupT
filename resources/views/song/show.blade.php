@@ -9,7 +9,6 @@
                 <div class="row">
                     <div class="col">
                         <video style="border-radius:10px" controls width="800" height="500" autoplay src="{{url("/upload/upload/".$song->video)}} " id="myVideo">Video</video>
-                       
 
                     </div>
                     <div class="col" style="margin-top:5rem;">

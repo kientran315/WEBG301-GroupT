@@ -8,6 +8,7 @@ use App\Models\Category;
 use App\Models\National;
 use App\Models\Song;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class SongController extends Controller
 {
@@ -28,6 +29,9 @@ class SongController extends Controller
      */
     public function create()
     {
+        if (!Auth::check()) {
+            return redirect('/login');
+            }
         $artists = Artist::all();
         $categories = Category::all();
         $albums = Album::all();
@@ -45,6 +49,9 @@ class SongController extends Controller
      */
     public function store(Request $request)
     {
+        if (!Auth::check()) {
+            return redirect('/login');
+            }
         $song = new Song();
         $song->name = $request->name;
         $song->album_id = $request->album;
@@ -73,6 +80,9 @@ class SongController extends Controller
      */
     public function edit(string $id)
     {
+        if (!Auth::check()) {
+            return redirect('/login');
+            }
         $song = Song::find($id);
         $artists = Artist::all();
         $categories = Category::all();
@@ -92,15 +102,23 @@ class SongController extends Controller
      * Update the specified resource in storage.
      */
     public function update(Request $request, string $id)
-    {
+    {   
+        if (!Auth::check()) {
+        return redirect('/login');
+        }
         $song =  Song::find($id);
         $song->name = $request->name;
         $song->artists()->sync($request->artists);
         $song->album_id = $request->album;
         $song->national_id = $request->national;
         $song->category_id = $request->category;
-        $video = $request->file('video')->store('upload');
-        $song->video = substr($video, strlen('public/'));
+        if($request->hasFile('video')){
+            $video = $request->file('video')->store('upload');
+            $song->video = substr($video, strlen('public/'));
+          }  else{
+                $song->video == null;
+          }
+      
         $song->save();
 
         return redirect('/songs')->with('status', 'Success');
@@ -111,6 +129,9 @@ class SongController extends Controller
      */
     public function destroy(string $id)
     {
+        if (!Auth::check()) {
+            return redirect('/login');
+            }
         $song = Song::find($id);
 
         $song->delete();

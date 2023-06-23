@@ -10,7 +10,7 @@ class Song extends Model
     use HasFactory;
     protected $table = 'songs';
     protected $fillable = [
-        'name', 'artist_id', 'album_id', 'category_id', 'national_id','video', 
+        'name', 'artist_id', 'album_id', 'category_id', 'national_id','video',  
     ];
 
     public function artists()

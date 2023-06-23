@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Artist;
+use Illuminate\Support\Facades\Auth;
 
 class ArtistController extends Controller
 {
@@ -22,6 +23,9 @@ class ArtistController extends Controller
      */
     public function create()
     {
+        if (!Auth::check()) {
+            return redirect('/login');
+            }
         return view('artist.create');
     }
 
@@ -30,6 +34,9 @@ class ArtistController extends Controller
      */
     public function store(Request $request)
     {
+        if (!Auth::check()) {
+            return redirect('/login');
+            }
         $artist = new Artist();
         $artist->name = $request->name;
         $artist->age = $request->age;
@@ -59,6 +66,9 @@ class ArtistController extends Controller
      */
     public function edit(string $id)
     {
+        if (!Auth::check()) {
+            return redirect('/login');
+            }
         $artist = Artist::find($id);
 
         return view('artist.edit', ['artist' => $artist]);
@@ -69,6 +79,9 @@ class ArtistController extends Controller
      */
     public function update(Request $request, string $id)
     {
+        if (!Auth::check()) {
+            return redirect('/login');
+            }
         $artist =  Artist::find($id);
         $artist->name = $request->name;
         $artist->age = $request->age;
@@ -86,6 +99,9 @@ class ArtistController extends Controller
      */
     public function destroy(string $id)
     {
+        if (!Auth::check()) {
+            return redirect('/login');
+            }
         $artist = Artist::find($id);
 
         $artist->delete();

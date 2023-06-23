@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Album;
+use Illuminate\Support\Facades\Auth;
 class AlbumController extends Controller
 {
     /**
@@ -24,6 +25,9 @@ class AlbumController extends Controller
      */
     public function create()
     {
+        if (!Auth::check()) {
+            return redirect('/login');
+            }
         return view('album.create');
     }
 
@@ -32,6 +36,9 @@ class AlbumController extends Controller
      */
     public function store(Request $request)
     {   
+        if (!Auth::check()) {
+            return redirect('/login');
+            }
         $album = new Album();
         $album->name = $request->name;
         $album->description = $request->description;
@@ -59,6 +66,9 @@ class AlbumController extends Controller
      */
     public function edit(string $id)
     {
+        if (!Auth::check()) {
+            return redirect('/login');
+            }
         $album = Album::find($id);
         return view('album.edit', [
             'album' => $album,
@@ -70,6 +80,9 @@ class AlbumController extends Controller
      */
     public function update(Request $request, string $id)
     {
+        if (!Auth::check()) {
+            return redirect('/login');
+            }
         $album =  Album::find($id);
 
         $album->name = $request->name;
@@ -87,6 +100,9 @@ class AlbumController extends Controller
      */
     public function destroy(string $id)
     {
+        if (!Auth::check()) {
+            return redirect('/login');
+            }
         $album = Album::find($id);
 
         $album->delete();

@@ -9,6 +9,10 @@
                         <input type="text" class="form-control" id="name" name="name" placeholder="name">
                     </div>
                     <div class="mb-3">
+                        <label for="year" class="form-label " style="color: red">Year</label>
+                        <input type="number" class="form-control" id="year" name="year" placeholder="year">
+                    </div>
+                    <div class="mb-3">
                         <label for="video" class="form-label" style="color: red">Song file</label>
                         <input type="file" class="form-control" id="video" name="video" placeholder="name">
                     </div>

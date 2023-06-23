@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\National;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class NationalController extends Controller
 {
@@ -22,6 +23,9 @@ class NationalController extends Controller
      */
     public function create()
     {
+        if (!Auth::check()) {
+            return redirect('/login');
+            }
         return view('national.create');
     }
 
@@ -30,6 +34,9 @@ class NationalController extends Controller
      */
     public function store(Request $request)
     {
+        if (!Auth::check()) {
+            return redirect('/login');
+            }
         $national = new National();
         $national->name = $request->name;
 
@@ -54,6 +61,9 @@ class NationalController extends Controller
      */
     public function edit(string $id)
     {
+        if (!Auth::check()) {
+            return redirect('/login');
+            }
         $national = National::find($id);
 
         return view('national.edit', ['national' => $national]);
@@ -64,6 +74,9 @@ class NationalController extends Controller
      */
     public function update(Request $request, string $id)
     {
+        if (!Auth::check()) {
+            return redirect('/login');
+            }
         $national = National::find($id);
         $national->name = $request->name;
 
@@ -78,6 +91,9 @@ class NationalController extends Controller
      */
     public function destroy(string $id)
     {
+        if (!Auth::check()) {
+            return redirect('/login');
+            }
         $national = National::find($id);
 
         $national->delete();

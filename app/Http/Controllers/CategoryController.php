@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CategoryController extends Controller
 {
@@ -22,6 +23,9 @@ class CategoryController extends Controller
      */
     public function create()
     {
+        if (!Auth::check()) {
+            return redirect('/login');
+            }
         return view('category.create');
     }
 
@@ -30,6 +34,9 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
+        if (!Auth::check()) {
+            return redirect('/login');
+            }
         $category = new Category();
         $category->name = $request->name;
        
@@ -53,6 +60,9 @@ class CategoryController extends Controller
      */
     public function edit(string $id)
     {
+        if (!Auth::check()) {
+            return redirect('/login');
+            }
         $category = Category::find($id);
 
         return view('category.edit', ['category' => $category]);
@@ -63,6 +73,9 @@ class CategoryController extends Controller
      */
     public function update(Request $request, string $id)
     {
+        if (!Auth::check()) {
+            return redirect('/login');
+            }
         $category =  Category::find($id);
         $category->name = $request->name;
        
@@ -76,6 +89,9 @@ class CategoryController extends Controller
      */
     public function destroy(string $id)
     {
+        if (!Auth::check()) {
+            return redirect('/login');
+            }
         $category = Category::find($id);
 
         $category->delete();
